@@ -7,7 +7,7 @@ import {
   PlanUpdated as PlanUpdatedEvent,
 } from "../generated/DollarCostAveraging/DollarCostAveraging"
 import {
-  User,
+  User, UserPlanHistory
 } from "../generated/schema"
 import { store } from '@graphprotocol/graph-ts'
 
@@ -80,6 +80,18 @@ export function handlePlanStarted(
   user.investAmount = user.investAmount.plus(event.params.amount)
   user.totalBuy = user.totalBuy.plus(event.params.ethReceived)
   user.save()
+
+  const userPlanHistory = new UserPlanHistory(event.params.user.concat(event.transaction.hash).concatI32(event.transaction.index.toI32()))
+  userPlanHistory.address = event.params.user
+  userPlanHistory.amount = event.params.amount
+  userPlanHistory.ethReceived = event.params.ethReceived
+  userPlanHistory.planAmount = user.planAmount
+  userPlanHistory.investAmount = user.investAmount
+  userPlanHistory.totalBuy = user.totalBuy
+  userPlanHistory.investAt = event.block.timestamp
+  userPlanHistory.hash = event.transaction.hash
+  userPlanHistory.save()
+
 }
 
 /**

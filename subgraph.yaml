@@ -6,23 +6,24 @@ dataSources:
     name: DollarCostAveraging
     network: goerli
     source:
-      address: "0x57AC0e331bACE6BF2d38B4D0f646648855A03346"
+      address: "0x47f30179f296EFD00760298F7b8219EC29761326"
       abi: DollarCostAveraging
-      startBlock: 10018422
+      startBlock: 10189396
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - User
+        - UserPlanHistory
       abis:
         - name: DollarCostAveraging
           file: ./abis/DollarCostAveraging.json
       eventHandlers:
-        - event: PlanCreated(indexed address,uint256,uint256)
-          handler: handlePlanCreated
         - event: PlanStarted(indexed address)
           handler: handlePlanStarted
+        - event: PlanCreated(indexed address,uint256,uint256)
+          handler: handlePlanCreated
         - event: PlanStoped(indexed address)
           handler: handlePlanStoped
         - event: PlanTriggered(indexed address,uint256,uint256)

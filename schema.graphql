@@ -7,3 +7,16 @@ type User @entity {
   totalBuy: BigInt!
   status: Int!
 }
+
+
+type UserPlanHistory @entity {
+  id: Bytes!
+  address: Bytes!
+  amount: BigInt!
+  ethReceived: BigInt!
+  planAmount: BigInt!
+  investAmount: BigInt!
+  totalBuy: BigInt!
+  investAt: BigInt!
+  hash: Bytes!
+}
