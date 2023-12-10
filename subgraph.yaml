@@ -1,0 +1,32 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: DollarCostAveraging
+    network: goerli
+    source:
+      address: "0x57AC0e331bACE6BF2d38B4D0f646648855A03346"
+      abi: DollarCostAveraging
+      startBlock: 10018422
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - User
+      abis:
+        - name: DollarCostAveraging
+          file: ./abis/DollarCostAveraging.json
+      eventHandlers:
+        - event: PlanCreated(indexed address,uint256,uint256)
+          handler: handlePlanCreated
+        - event: PlanStarted(indexed address)
+          handler: handlePlanStarted
+        - event: PlanStoped(indexed address)
+          handler: handlePlanStoped
+        - event: PlanTriggered(indexed address,uint256,uint256)
+          handler: handlePlanTriggered
+        - event: PlanUpdated(indexed address,uint256,uint256)
+          handler: handlePlanUpdated
+      file: ./src/index.ts

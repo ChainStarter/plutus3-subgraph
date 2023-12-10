@@ -1,0 +1,9 @@
+type User @entity {
+  id: Bytes!
+  address: Bytes!
+  frequency: BigInt!
+  planAmount: BigInt!
+  investAmount: BigInt!
+  totalBuy: BigInt!
+  status: Int!
+}
